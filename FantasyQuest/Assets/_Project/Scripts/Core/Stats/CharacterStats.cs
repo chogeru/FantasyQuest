@@ -9,7 +9,11 @@ namespace Project.Core.Stats
     /// </summary>
     public class CharacterStats : MonoBehaviour
     {
-        [Header("Base Stats")]
+        [Header("Data Asset (推奨)")]
+        [Tooltip("ここ用データアセットをアタッチすると、以下の個別設定は上書きされます")]
+        [SerializeField] private CharacterData _characterData;
+
+        [Header("Base Stats (Manual Override)")]
         [SerializeField] private float _maxHealth = 100f;
         [SerializeField] private float _maxStamina = 50f;
         [SerializeField] private float _baseAttackPower = 10f;
@@ -38,6 +42,17 @@ namespace Project.Core.Stats
 
         private void Awake()
         {
+            // CharacterData がセットされていれば、インスペクターの値をそれで上書きする
+            if (_characterData != null)
+            {
+                _maxHealth = _characterData.MaxHealth;
+                _maxStamina = _characterData.MaxStamina;
+                _baseAttackPower = _characterData.BaseAttackPower;
+                _armor = _characterData.Armor;
+                _staminaRegenRate = _characterData.StaminaRegenRate;
+                _staminaRegenDelay = _characterData.StaminaRegenDelay;
+            }
+
             _currentHealth = _maxHealth;
             _currentStamina = _maxStamina;
         }

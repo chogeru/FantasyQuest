@@ -23,6 +23,9 @@ namespace Project.UI
         [Tooltip("スタミナゲージのImage(FillType=Filled推奨)")]
         [SerializeField] private Image _staminaFillImage;
         
+        [Tooltip("ダメージポップアップのプレハブ")]
+        [SerializeField] private GameObject _damagePopupPrefab;
+        
         // --- 演出用パラメータ ---
         [Header("Settings")]
         [SerializeField] private float _barSmoothSpeed = 5f;
@@ -61,6 +64,10 @@ namespace Project.UI
             _targetStaminaFill = currentVal / maxVal;
         }
 
+        // Statsでダメージを受けた(TakeDamage)際に呼ばれるようにするため、OnEnableで追加フックアップが必要ですが、
+        // 今はStats側でPopUpを生成するのではなく、HUD経由で呼べる口を用意しています。
+        // もしStats側から直接呼びたいなら、StatsにEventを追加しHandleDamageTakenを実装します。
+
         // === Visual Update ===
         private void Update()
         {
@@ -81,8 +88,14 @@ namespace Project.UI
         /// </summary>
         public void SpawnDamagePopup(Vector3 worldPosition, float damage)
         {
-            // Addressables等でPopUpテキストのPrefabを生成し、ScreenPointToRay等でワールド座標をUI座標に変換して配置。
-            Debug.Log($"<color=red>Damage Popup</color> : {damage} at {worldPosition}");
+            if (_damagePopupPrefab == null) return;
+
+            // ワールド空間上にPopUpを生成
+            GameObject popupObj = Instantiate(_damagePopupPrefab, worldPosition + Vector3.up * 1.5f, Quaternion.identity);
+            if (popupObj.TryGetComponent(out DamagePopup popup))
+            {
+                popup.Setup(damage);
+            }
         }
     }
 }

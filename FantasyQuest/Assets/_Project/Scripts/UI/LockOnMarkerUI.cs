@@ -1,5 +1,5 @@
 using UnityEngine;
-using Project.Core.Camera;
+using Project.Core.CameraSystem;
 
 namespace Project.UI
 {
@@ -33,7 +33,7 @@ namespace Project.UI
             if (_targetLockOn == null || _markerRect == null || _mainCamera == null) return;
 
             // ロックオン中でない場合、またはターゲットが存在しない場合は消す
-            if (!_targetLockOn.IsLockedOn || _targetLockOn.CurrentTarget == null)
+            if (!_targetLockOn.IsLockedOn || _targetLockOn.GetTarget() == null)
             {
                 if (_markerRect.gameObject.activeSelf) _markerRect.gameObject.SetActive(false);
                 return;
@@ -43,7 +43,7 @@ namespace Project.UI
             if (!_markerRect.gameObject.activeSelf) _markerRect.gameObject.SetActive(true);
 
             // 敵の中心（ワールド座標）をスクリーン座標（画面上のピクセル位置）に変換する
-            Vector3 targetWorldPosition = _targetLockOn.CurrentTarget.position;
+            Vector3 targetWorldPosition = _targetLockOn.GetTarget().position;
             
             // Note: 敵の少し上（または胸の高さ）あたりにマーカーを出したい場合はオフセットする
             targetWorldPosition += Vector3.up * 1.5f;

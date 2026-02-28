@@ -51,8 +51,8 @@ namespace Project.Systems.Save
         private void Update()
         {
             // 仮入力：テスト用に F5 でセーブ、F9 でロード
-            if (Input.GetKeyDown(KeyCode.F5)) SaveGame();
-            if (Input.GetKeyDown(KeyCode.F9)) LoadGame();
+            if (UnityEngine.Input.GetKeyDown(KeyCode.F5)) SaveGame();
+            if (UnityEngine.Input.GetKeyDown(KeyCode.F9)) LoadGame();
         }
 
         public void SaveGame()

@@ -255,5 +255,49 @@ namespace Project.Core.AI
             NavMesh.SamplePosition(randomDirection + origin, out NavMeshHit navHit, dist, NavMesh.AllAreas);
             return navHit.position;
         }
+
+#if UNITY_EDITOR
+        // === Visual Debugging (Gizmos) ===
+        private void OnDrawGizmosSelected()
+        {
+            // 索敵範囲の描画 (黄色)
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, _detectionRange);
+
+            // 攻撃範囲の描画 (赤色)
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, _attackRange);
+
+            // 視界(FOV)の描画 (オレンジ色)
+            Vector3 forward = transform.forward;
+            Vector3 leftRay = Quaternion.Euler(0, -_fieldOfViewAngle * 0.5f, 0) * forward;
+            Vector3 rightRay = Quaternion.Euler(0, _fieldOfViewAngle * 0.5f, 0) * forward;
+
+            Gizmos.color = new Color(1f, 0.5f, 0f); // オレンジ
+            Vector3 rayOrigin = transform.position + Vector3.up * 1f;
+
+            // 視界の扇形を表現するための境界線
+            Gizmos.DrawRay(rayOrigin, leftRay * _detectionRange);
+            Gizmos.DrawRay(rayOrigin, rightRay * _detectionRange);
+
+            // ターゲットがいる場合は、ターゲットへの線を引く
+            if (_targetPlayer != null && CurrentStateIs(EnemyState.Chase, EnemyState.Attacking))
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawLine(rayOrigin, _targetPlayer.position + Vector3.up * 1f);
+            }
+        }
+
+        // 状態チェック用ヘルパー（Gizmo描画時など、_stateMachineがNullの時のエラー防止用）
+        private bool CurrentStateIs(params EnemyState[] states)
+        {
+            if (_stateMachine == null) return false;
+            foreach(var state in states)
+            {
+                if (_stateMachine.CurrentState == state) return true;
+            }
+            return false;
+        }
+#endif
     }
 }

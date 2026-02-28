@@ -47,10 +47,9 @@ namespace Project.Systems.Combat
                     damageable.TakeDamage(_damageAmount);
                     
                     // 攻撃が当たった瞬間に「ヒットストップ(時間停止)」をかける
-                    if (_enableHitstop)
+                    if (_enableHitstop && HitstopManager.Instance != null)
                     {
-                        // 念のため既に動いていれば多重に止めないなどの制御をここで行うとより安全です
-                        StartCoroutine(HitstopRoutine());
+                        HitstopManager.Instance.TriggerHitstop(_hitstopDuration, _hitstopTimeScale);
                     }
 
                     SetActive(false); // 多段ヒット防止のため、即座に判定をオフにする
@@ -58,20 +57,26 @@ namespace Project.Systems.Combat
             }
         }
 
-        /// <summary>
-        /// 当たった瞬間にわずかにゲームの時間を遅くし、すぐに元に戻すコルーチン
-        /// </summary>
-        private IEnumerator HitstopRoutine()
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
         {
-            // 現在のTimeScaleを保存しておく（すでに別のスロー演出などが掛かっている場合を考慮）
-            float originalTimeScale = Time.timeScale;
-            Time.timeScale = _hitstopTimeScale;
-            
-            // TimeScaleが遅くなっているため、現実の秒数を待つ「WaitForSecondsRealtime」を使用する
-            yield return new WaitForSecondsRealtime(_hitstopDuration);
-            
-            // 時間を元に戻す
-            Time.timeScale = originalTimeScale;
+            if (_collider != null && _collider.enabled)
+            {
+                Gizmos.matrix = transform.localToWorldMatrix;
+                Gizmos.color = new Color(1f, 0f, 0f, 0.4f); // 半透明の赤
+                
+                if (_collider is BoxCollider box)
+                {
+                    Gizmos.DrawCube(box.center, box.size);
+                    Gizmos.DrawWireCube(box.center, box.size);
+                }
+                else if (_collider is SphereCollider sphere)
+                {
+                    Gizmos.DrawSphere(sphere.center, sphere.radius);
+                    Gizmos.DrawWireSphere(sphere.center, sphere.radius);
+                }
+            }
         }
+#endif
     }
 }

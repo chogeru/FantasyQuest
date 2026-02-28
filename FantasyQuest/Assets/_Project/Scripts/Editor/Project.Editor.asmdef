@@ -4,7 +4,8 @@
     "references": [
         "Project.Core",
         "Project.Systems",
-        "Project.UI"
+        "Project.UI",
+        "Unity.InputSystem"
     ],
     "includePlatforms": [
         "Editor"
