@@ -1,0 +1,2 @@
+﻿# ScriptableObject Definitions
+データ構造を定義するScriptableObjectクラスのC#スクリプトを格納します。
