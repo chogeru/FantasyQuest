@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5119456313353921702
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8091562023395317160, guid: a1c6fcc429226d442b76d514a5e62193, type: 3}
+      propertyPath: m_Name
+      value: barrel_02_destructible
+      objectReference: {fileID: 0}
+    - target: {fileID: 8863313205455523602, guid: a1c6fcc429226d442b76d514a5e62193, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8863313205455523602, guid: a1c6fcc429226d442b76d514a5e62193, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8863313205455523602, guid: a1c6fcc429226d442b76d514a5e62193, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8863313205455523602, guid: a1c6fcc429226d442b76d514a5e62193, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8863313205455523602, guid: a1c6fcc429226d442b76d514a5e62193, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8863313205455523602, guid: a1c6fcc429226d442b76d514a5e62193, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8863313205455523602, guid: a1c6fcc429226d442b76d514a5e62193, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8863313205455523602, guid: a1c6fcc429226d442b76d514a5e62193, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8863313205455523602, guid: a1c6fcc429226d442b76d514a5e62193, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8863313205455523602, guid: a1c6fcc429226d442b76d514a5e62193, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8091562023395317160, guid: a1c6fcc429226d442b76d514a5e62193, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3099018833701898746}
+    - targetCorrespondingSourceObject: {fileID: 8091562023395317160, guid: a1c6fcc429226d442b76d514a5e62193, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8997501445746444140}
+  m_SourcePrefab: {fileID: 100100000, guid: a1c6fcc429226d442b76d514a5e62193, type: 3}
+--- !u!1 &3981453300096807182 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8091562023395317160, guid: a1c6fcc429226d442b76d514a5e62193, type: 3}
+  m_PrefabInstance: {fileID: 5119456313353921702}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &3099018833701898746
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3981453300096807182}
+  m_Material: {fileID: 13400000, guid: 3b6aa81479db5a54488b769d1ed2a277, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.6105468
+  m_Height: 1.61
+  m_Direction: 1
+  m_Center: {x: 0.0016003251, y: 0.71492493, z: 0.00005143881}
+--- !u!114 &8997501445746444140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3981453300096807182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 877537cda7c83dd4989872ab33cea55f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 1
+  DebrisPrefab: {fileID: 6629971194052481647, guid: 0e4190f32e0237548bf63b0d29eb9ef9, type: 3}
