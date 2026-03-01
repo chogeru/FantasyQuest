@@ -1,0 +1,39 @@
+Licenses : 
+
+
+Inter Font License
+
+This asset includes the "Inter" font, designed by Rasmus Andersson.
+
+Font License: SIL Open Font License (OFL) v1.1
+More info: https://scripts.sil.org/OFL
+
+You are free to use, modify, embed, and redistribute the font under the terms of the OFL.
+
+
+Unity Starter Assets License
+
+This asset includes Unity's Starter Assets (e.g. First Person Controller), provided under the Unity Companion License.
+
+Unity Companion License (v1.0):  
+https://unity3d.com/legal/licenses/Unity_Companion_License
+
+These assets are provided by Unity Technologies and may only be used in conjunction with Unity-based projects.
+
+Copyright (c) Unity Technologies.
+
+
+Synty Studios – “Polygon – Water Guns” mesh
+
+This mesh is used under the terms of Synty Studios' One Time Purchase Licence (EULA).
+You are granted a perpetual, non-exclusive right to incorporate this mesh as part of your product.
+
+You may:
+ - Include it in this Unity asset package for redistribution.
+
+You may NOT:
+ - Sell or redistribute the mesh on a standalone basis.
+ - Use it outside the context of this package.
+
+Licensed under Synty Studios One Time Purchase Licence.
+
