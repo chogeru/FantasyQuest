@@ -1,0 +1,199 @@
+%PDF-1.4
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+
+2 0 obj
+<<
+/Type /Pages
+/Kids [3 0 R]
+/Count 1
+>>
+endobj
+
+3 0 obj
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [0 0 612 792]
+/Contents 4 0 R
+/Resources <<
+  /Font <<
+    /F1 5 0 R
+  >>
+>>
+>>
+endobj
+
+4 0 obj
+<<
+/Length 2000
+>>
+stream
+BT
+/F1 12 Tf
+50 750 Td
+(Kirist Development Tool - User Guide) Tj
+0 -20 Td
+(Version 1.0) Tj
+0 -40 Td
+(Table of Contents) Tj
+0 -20 Td
+(1. Introduction) Tj
+0 -15 Td
+(2. Installation) Tj
+0 -15 Td
+(3. Features Overview) Tj
+0 -15 Td
+(4. Missing Script Finder) Tj
+0 -15 Td
+(5. Missing Material Finder) Tj
+0 -15 Td
+(6. Missing Prefab Finder) Tj
+0 -15 Td
+(7. Prefab Analyzer) Tj
+0 -15 Td
+(8. Scene Analyzer) Tj
+0 -15 Td
+(9. Addressable Helper) Tj
+0 -15 Td
+(10. Troubleshooting) Tj
+0 -40 Td
+(1. Introduction) Tj
+0 -20 Td
+(Kirist is a comprehensive Unity Editor tool designed to help developers) Tj
+0 -15 Td
+(manage and optimize their Unity projects. It provides powerful features) Tj
+0 -15 Td
+(for finding missing scripts, materials, prefabs, and analyzing project) Tj
+0 -15 Td
+(structure.) Tj
+0 -30 Td
+(2. Installation) Tj
+0 -20 Td
+(1. Import the Kirist package into your Unity project) Tj
+0 -15 Td
+(2. Open the tool via Tools > Kirist > Open Kirist Window) Tj
+0 -15 Td
+(3. The tool window will open with all available features) Tj
+0 -30 Td
+(3. Features Overview) Tj
+0 -20 Td
+(Kirist provides six main features:) Tj
+0 -15 Td
+(- Missing Script Finder: Locate and fix missing script references) Tj
+0 -15 Td
+(- Missing Material Finder: Find and replace missing materials) Tj
+0 -15 Td
+(- Missing Prefab Finder: Identify broken prefab references) Tj
+0 -15 Td
+(- Prefab Analyzer: Analyze prefab structure and dependencies) Tj
+0 -15 Td
+(- Scene Analyzer: Analyze scene content and optimization) Tj
+0 -15 Td
+(- Addressable Helper: Manage Addressable assets) Tj
+0 -30 Td
+(4. Missing Script Finder) Tj
+0 -20 Td
+(Use this feature to find GameObjects with missing script components.) Tj
+0 -15 Td
+(1. Select search mode: Scene or Prefab) Tj
+0 -15 Td
+(2. Choose search scope if using Scene mode) Tj
+0 -15 Td
+(3. Click "Find Missing Scripts" button) Tj
+0 -15 Td
+(4. Review results and remove missing components) Tj
+0 -30 Td
+(5. Missing Material Finder) Tj
+0 -20 Td
+(Find GameObjects with missing material references.) Tj
+0 -15 Td
+(1. Select search mode and scope) Tj
+0 -15 Td
+(2. Click "Find Missing Materials" button) Tj
+0 -15 Td
+(3. Review and fix missing material assignments) Tj
+0 -30 Td
+(6. Missing Prefab Finder) Tj
+0 -20 Td
+(Identify broken prefab references in your project.) Tj
+0 -15 Td
+(1. Configure search parameters) Tj
+0 -15 Td
+(2. Click "Find Missing Prefabs" button) Tj
+0 -15 Td
+(3. Review results and fix broken references) Tj
+0 -30 Td
+(7. Prefab Analyzer) Tj
+0 -20 Td
+(Analyze prefab structure and dependencies.) Tj
+0 -15 Td
+(1. Select prefab to analyze) Tj
+0 -15 Td
+(2. View component hierarchy) Tj
+0 -15 Td
+(3. Check for optimization opportunities) Tj
+0 -30 Td
+(8. Scene Analyzer) Tj
+0 -20 Td
+(Analyze scene content for optimization.) Tj
+0 -15 Td
+(1. Select scene to analyze) Tj
+0 -15 Td
+(2. Review scene statistics) Tj
+0 -15 Td
+(3. Identify performance bottlenecks) Tj
+0 -30 Td
+(9. Addressable Helper) Tj
+0 -20 Td
+(Manage Addressable assets in your project.) Tj
+0 -15 Td
+(1. View Addressable groups) Tj
+0 -15 Td
+(2. Manage asset references) Tj
+0 -15 Td
+(3. Optimize Addressable configuration) Tj
+0 -30 Td
+(10. Troubleshooting) Tj
+0 -20 Td
+(Common issues and solutions:) Tj
+0 -15 Td
+(- Tool not opening: Check Unity Console for errors) Tj
+0 -15 Td
+(- Search not working: Verify project structure) Tj
+0 -15 Td
+(- Performance issues: Use smaller search scopes) Tj
+0 -15 Td
+(- Contact support: Check Unity Asset Store page) Tj
+ET
+endstream
+endobj
+
+5 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+endobj
+
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000274 00000 n 
+0000002300 00000 n 
+trailer
+<<
+/Size 6
+/Root 1 0 R
+>>
+startxref
+2357
+%%EOF
