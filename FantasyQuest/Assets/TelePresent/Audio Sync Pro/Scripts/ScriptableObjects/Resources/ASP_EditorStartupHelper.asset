@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ASP_EditorStartupHelper
   m_EditorClassIdentifier: 
   displayWelcomeMessageOnLaunch: 1
-  firstInitialization: 1
+  firstInitialization: 0
