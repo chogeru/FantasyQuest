@@ -1,0 +1,110 @@
+## 1.1.13
+### Added
+- LOD groups to Example Character
+- Separate models for Body/Shirt/Pants for the Modular Workflow example
+- An error when trying to drag in a prefab that already has the Occludee component
+
+### Changed
+- Made the 'Unable to resolve bones' error more descriptive
+
+## 1.1.12
+### Fixed
+- An issue with viewing skinned/non-skinned mesh combinations
+
+## 1.1.11
+### Added
+- Sphere brush which allows for painting all vertices within a radius
+### Changed
+- Circle brush is now displayed on the surface of the object
+
+## 1.1.10
+### Added
+- Invert button that will invert the painted selection
+### Fixed
+- Issue where the Incomplete Occlusion Data confirmation dialog was being shown falsely
+
+## 1.1.9
+### Added
+- Rigged example character and Walking animation
+- Modular Workflow example
+### Changed
+- Painting is now blocked when the scene view is in Orbit mode
+
+## 1.1.8
+### Added
+- Rejecting a prefab when dragged into a configuration when it's already part of another configuration
+
+## 1.1.7
+### Added
+- Creating ClothingCullerConfigurations from the CreateAssetMenu
+- Changing selected ClothingCullerConfiguration from the Edit window
+### Changed
+- Modular clothing workflow is now set for each ClothingCullerConfiguration instead of on the ClothingCuller component and a global setting
+
+## 1.1.6
+### Fixed
+- Issue where deregistering an Occludee didn't uncull it correctly
+- SkinnedMeshData not being created if the mesh isn't part of an FBX and improved error handling
+
+## 1.1.5
+### Added
+- Basic example
+- Object field to the preferences to allow switching which configuration file is being displayed in the edit window
+### Fixed
+- Possible rotation and scaling issues inside the painting scene
+
+## 1.1.4
+### Added
+- Functionality to paint occlusion data with a brush
+
+## 1.1.3
+### Fixed
+- Meshes inside the View Occlusion Data scene not properly using the rotation of the original
+
+## 1.1.2
+### Added
+- Editor preference whether or not to view meshes as skinned inside the View Occlusion Data scene (defaults to true)
+- Optional isModular parameter to the Register method (defaults to true) that allows users to exclude an Occludee from the modular clothing workflow
+### Changed
+- Bones resolver now allows resolving while not all bones have been resolved, but will display a confirm dialog
+- Now using every skinned mesh inside the occludee when trying to create the rig inside the View Occlusion Data scene
+### Fixed
+- Reset method using editor-only method, causing build error
+- Faces outside the occluder's bounds getting flagged as occluding
+- Meshes inside the View Occlusion Data scene not properly getting created as non-skinned when the rig couldn't be created
+
+## 1.1.1
+### Added
+- RegisterAllOccludees example script
+### Changed
+- Ensured that the created rig inside the View Occlusion Data scene will only contain Transforms
+- Each skinned mesh inside the View Occlusion Data now resolves its own bones
+### Fixed
+- Bones Resolver not resolving the Rig Root as a bone
+
+## 1.1.0
+### Added
+- Support for blendshapes by creating skinned meshes inside the View Occlussion Data scene when possible
+### Changed
+- SkinnedMeshData now saves bone names instead of HumanBodyBones enum values
+- ClothingCuller component now takes a 'Rig Root' Transform instead of an Animator
+- BonesResolverWindow now takes a 'Rig Root' Transform instead of an Animator
+### Fixed
+- The OcclusionDataViewer not cleaning up properly when directly opening another scene
+- Merging of occlusion data not working correctly since 1.0.2
+
+## 1.0.2
+### Changed
+- Performance of reading baked data when culling drastically increased
+- Reduced the amount of memory allocations when culling
+- Ensured that no memory is allocated before a mesh is culled for the first time
+### Fixed
+- Culling of submeshes not using the correct triangle index
+- Prefabs added from the scene pointing to the scene-object instead of the prefab
+
+## 1.0.1
+### Fixed
+- The controls window of the View Occlusion Data scene not scaling properly
+
+## 1.0
+- First release

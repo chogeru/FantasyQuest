@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea655116569b3fe48979b9907f3ff443, type: 3}
+  m_Name: Pants
+  m_EditorClassIdentifier: 
+  <Prefab>k__BackingField: {fileID: 7426637639146039880, guid: 077c85c11ac0d874385b2c395ac17dab, type: 3}
+  <Occluders>k__BackingField: []
+  <LodOcclusionData>k__BackingField:
+  - <MeshOcclusionData>k__BackingField:
+    - originalSharedMesh: {fileID: -2358103451797288936, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+      occludedTrianglesByLODId:
+        keys: []
+        values: []
+    <Id>k__BackingField: 4c7ec8fc-3731-45f8-bbc9-d55999b3b1cb
+  - <MeshOcclusionData>k__BackingField:
+    - originalSharedMesh: {fileID: -5680313662847770947, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+      occludedTrianglesByLODId:
+        keys: []
+        values: []
+    <Id>k__BackingField: 4b7fabde-ed6b-424b-98dd-f3033b3b3c60
+  - <MeshOcclusionData>k__BackingField:
+    - originalSharedMesh: {fileID: 6266090815478614971, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+      occludedTrianglesByLODId:
+        keys: []
+        values: []
+    <Id>k__BackingField: d53d22af-a8e9-4bfb-aee2-974308bb1938
+  <SkinnedMeshData>k__BackingField:
+    <IsInitialized>k__BackingField: 1
+    <RootBoneName>k__BackingField: spine
+    <BoneNames>k__BackingField:
+    - spine
+    - spine.001
+    - spine.002
+    - spine.003
+    - spine.004
+    - spine.005
+    - spine.006
+    - shoulder.L
+    - upper_arm.L
+    - forearm.L
+    - hand.L
+    - shoulder.R
+    - upper_arm.R
+    - forearm.R
+    - hand.R
+    - breast.L
+    - breast.R
+    - pelvis.L
+    - pelvis.R
+    - thigh.L
+    - shin.L
+    - foot.L
+    - toe.L
+    - heel.02.L
+    - thigh.R
+    - shin.R
+    - foot.R
+    - toe.R
+    - heel.02.R
+    originalRootBone: {fileID: -2071344225827461587, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    originalBones:
+    - {fileID: -2071344225827461587, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: -4610119191276974500, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: 5429733065797243343, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: -7031483246694867997, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: 6343860667657479200, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: -3711823943682052573, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: 606128990315429190, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: 1469694194731619934, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: -7185657710614512005, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: 8491639716474049611, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: 83191756988206841, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: 1548976506026636733, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: 3545681847387737526, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: 7227930130329374466, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: -5564323307732053633, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: -162357319309235230, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: -3423616691906961446, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: -4665369342661993943, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: -7049735284015951260, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: -2684820686879188925, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: -6155149949117345401, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: -4270808684324443044, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: 7375077141080035625, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: -5967714996036147992, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: 4582767305256193227, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: -6572385790801441944, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: 6364047359946613217, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: 4277868121535682456, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
+    - {fileID: 5062630944135849910, guid: a52ebd7a0ff7d1d4bbd04062765aadf8, type: 3}
