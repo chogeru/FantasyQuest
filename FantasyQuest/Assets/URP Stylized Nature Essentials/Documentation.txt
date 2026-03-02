@@ -1,0 +1,123 @@
+#*IMPORTANT*#
+Performance
+To use dynamic batching, go to |Preferences -> Graphics -> Set 'Advanced Properties' to 'All Visible'|
+|Project Settings -> Graphics -> PC_RPAsset -> Enable SRP Batcher and Dynamic Batching|, GPU Resident drawer set to Instanced Drawing
+|Project Settings -> Graphics -> Set BatchRenderGroup Variants to "Keep All"|
+
+
+If dynamic batching does not work Disable Static Batching.
+|Project Settings -> Player -> Other Settings -> Disable Static Batching|
+
+If dynamic batching does not work for your project use static batching instead, mark large prefabs as 'Static' and respawn them if needed.
+
+#*--------------------------------------------------------*#
+
+Adventure Nature Vol.4
+This 3D environment asset offers a beautifully crafted, procedural, imaginative landscape filled with life and adventure.
+
+This package works only in Unity version 6000.0.23f1 and higher.
+Only URP is supported.
+
+Project includes (21) assets.
+1 Example Scene
+
+Hierarchical spawner is an amazing editor tool used to quickly generate parts of the scene with one click.
+All of the large assets (Trees, rocks, bushes) in the example scene were placed procedurally in editor.
+
+Shaders
+Water Shader with procedurally generated waves.
+Vegetation Shaders for grass and trees with Translucency, Wind, Stylized Fresnel Effect, Color Gradients, Blending and Distant Fade.
+Sun Rays (God Rays, Fake Volumetrics) Shader, that will automatically adjust to sun's position in the sky, and get it's color.
+
+Moss covered rocks shader.
+
+Procedural Clouds Shader.
+
+High quality textures - mostly 2048x2048 pixels (Albedo, Mask and Normal map)
+
+Models are Low-Mid Poly.
+All models except Terrain Details have LODs.
+
+This project uses dynamic batching instead of static.
+
+#*--------------------------------------------------------*#
+
+# Hierarchical Object Spawner Documentation
+
+## Overview
+
+The **Hierarchical Object Spawner** is a Unity editor tool that creates natural-looking object distributions by spawning objects in a hierarchical pattern. It places large objects first, then spawns medium objects around each large object, and finally spawns small objects around each medium object, creating realistic clusters similar to natural ecosystems.
+
+## Key Features
+
+- **Three-tier hierarchical spawning**: Large → Medium → Small objects
+- **Weighted random selection**: Control spawn probability for each prefab
+- **Terrain-aware placement**: Uses raycasting to place objects on surfaces
+- **Slope filtering**: Only spawn on surfaces within specified angle ranges
+- **Ground alignment**: Optional alignment to surface normals
+- **Configurable spawn areas**: Different radii for each object tier
+- **Undo support**: Full Unity Editor undo/redo integration
+- **Real-time preview**: Visual gizmo showing spawn area
+
+## How to Use
+
+### Setup
+1. Create an empty GameObject in your scene
+2. Add the `HierarchicalObjectSpawner` component
+3. Ensure your terrain/ground objects are tagged appropriately (default: "Terrain")
+
+### Configuration
+
+#### Spawn Areas
+- **Spawn Radius**: Initial area around the spawner for large objects
+- **Large Object Radius**: Area around each large object for medium objects  
+- **Medium Object Radius**: Area around each medium object for small objects
+
+#### Object Prefabs & Weights
+- Add prefab arrays for each tier (Large, Medium, Small)
+- Set weight values to control spawn probability (higher = more likely)
+- Weights are automatically normalized to percentages
+
+#### Spawn Counts
+- **Large Object Count**: Number of large objects to spawn initially
+- **Medium Objects Per Large**: How many medium objects spawn near each large object
+- **Small Objects Per Medium**: How many small objects spawn near each medium object
+
+#### Filtering & Placement
+- **Spawn Tag**: Tag that valid spawn surfaces must have
+- **Min/Max Slope Angle**: Surface angle constraints (0° = flat, 90° = vertical)
+- **Size Ranges**: Random scale multipliers for each object tier
+- **Rotation Options**: Ground alignment and random rotation settings
+
+### Usage
+1. Configure all settings in the Inspector
+2. Click **"Spawn Objects"** to generate the hierarchy
+3. Click **"Clear Objects"** to remove all spawned objects
+4. Adjust the **Seed** value for different random distributions
+
+## Example Use Cases
+
+- **Forest Generation**: Trees (large) → Bushes (medium) → Grass/Flowers (small)
+- **Rock Formations**: Boulders → Medium rocks → Pebbles  
+- **Coral Reefs**: Large coral → Medium coral → Small sea plants
+- **Urban Debris**: Large debris → Medium objects → Small litter
+- **Mushroom Colonies**: Large mushrooms → Medium mushrooms → Small fungi
+
+## Tips
+
+- Start with low spawn counts while tweaking settings
+- Use the gizmo to visualize the spawn area
+- Ensure your terrain has proper colliders for raycasting
+- Weight values don't need to add up to 100 - they're automatically normalized
+- Experiment with different seed values to find the perfect distribution
+- Use slope filtering to prevent spawning on steep cliffs or walls
+
+## Technical Notes
+
+- Uses Unity's built-in raycasting for surface detection
+- Supports full Editor undo/redo functionality
+- Spawned objects become children of the spawner GameObject
+- Weight arrays automatically resize to match prefab arrays
+- Ground alignment preserves Y-axis rotation while aligning to surface normals
+
+This tool is ideal for generating forests, rock clusters, or any natural environment with hierarchical object placement.

@@ -1,0 +1,134 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 32
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: TreeLeaves
+  m_Shader: {fileID: -6465566751694194690, guid: a674c4671635d8b43883439e2a21093f, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AO:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Additional_Color_Texture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseColor:
+        m_Texture: {fileID: 2800000, guid: 78e23fb388e7aae4299498240a496be8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal_Map:
+        m_Texture: {fileID: 2800000, guid: 55f5cd6adef7b144a8d31a382c9e8287, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Wind_Texture:
+        m_Texture: {fileID: 2800000, guid: 218759ab001944f4d944d970c631e4e5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AO_Enable: 1
+    - _AO_Strength: 0.642
+    - _Alpha_Clip_Threshold: 0.45
+    - _Bottom_Color_Blend: 25.8
+    - _Bottom_Color_Height: 18.4
+    - _Bottom_Color_Strength: 0.325
+    - _Breakup_Noise_Scale: 10
+    - _Breakup_Noise_Scale_World: 1
+    - _Color_Breakup_Strength: 0
+    - _Contrast: -0.13
+    - _Custom_Normals_Strength: 0.514
+    - _Fresnel: 1
+    - _Fresnel_Power: 20
+    - _Fresnel_Shade_Strength: 0
+    - _Fresnel_Strength: 0.5
+    - _Height: -5.33
+    - _Height_Bottom: -4.19
+    - _Height_Top: -5.76
+    - _LOD_Blending_Improvement: 1
+    - _Normal_Strength: 1
+    - _Power_Of_Additional_Color_Texture: 0
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _Seed: 56.3
+    - _Smoothness: 0.031
+    - _Thickness: 0.511
+    - _Tip_Color_Blend: -10
+    - _Tip_Color_Height: -20
+    - _Tip_Color_Strength: 0.694
+    - _Tip_Color_Strength_1: 1
+    - _UseNormalMap: 1
+    - _UseSingleColor: 1
+    - _Use_2_Diferent_Colors: 1
+    - _Use_Additional_Color_Texture: 0
+    - _Use_Color_Not_Texture: 1
+    - _Use_Custom_Normals: 1
+    - _Use_Normal_Direction_For_Botom_Color_Blend: 0
+    - _Use_Translucency: 1
+    - _Wind_Enable: 1
+    - _Wind_Noise_Speed: 6
+    - _Z_Wind: 0
+    m_Colors:
+    - _Bottom_Color: {r: 0, g: 0.42111725, b: 0.5396226, a: 0}
+    - _Bottom_Color_Contrast: {r: 0.2, g: 0.6, b: 0, a: 0}
+    - _Bottom_Contrast: {r: -0.3, g: 0.8, b: 0, a: 0}
+    - _Color: {r: 0.31822696, g: 0.9622642, b: 0.24510492, a: 0}
+    - _Color_1: {r: 1, g: 0.8176217, b: 0, a: 0}
+    - _Color_2: {r: 0, g: 1, b: 0.20952821, a: 0}
+    - _FresnelColor: {r: 1, g: 1, b: 1, a: 0}
+    - _NearFarRange: {r: 20, g: 200, b: 0, a: 0}
+    - _Noise_Contrast: {r: 0.35, g: 0.35, b: 0, a: 0}
+    - _Specular_Color: {r: 0.16078432, g: 0.16078432, b: 0.16078432, a: 0}
+    - _Tip_Color: {r: 0.7470641, g: 1, b: 0, a: 0}
+    - _Tip_Color_Contrast: {r: 0, g: 0.8, b: 0, a: 0}
+    - _Top_Color_Contrast: {r: 1.5, g: 0, b: 0, a: 0}
+    - _Translusency_Color: {r: 0.9658494, g: 1, b: 0, a: 0}
+    - _Wind_Noise_Color_Contrast: {r: 1, g: 1, b: 0, a: 0}
+    - _Wind_Noise_Contrast: {r: 0, g: 0.8, b: 0, a: 0}
+    - _Wind_Noise_Scale: {r: 0, g: 0.3, b: 0, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
+--- !u!114 &5655465424977070482
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 9

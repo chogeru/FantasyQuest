@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 3eaf6000a45077840939ba75d817afe5
+VisualEffectImporter:
+  externalObjects: {}
+  serializedVersion: 1
+  template:
+    name: 
+    category: 
+    description: 
+    icon: {instanceID: 0}
+    thumbnail: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 324069
+  packageName: Adventure Nature Vol.3
+  packageVersion: 1.0
+  assetPath: Assets/AdventureNature Vol.3/VFX/Faling Leaves.vfx
+  uploadId: 766300

@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3486819304650652838
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 9
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 32
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Bushes_1_2
+  m_Shader: {fileID: -6465566751694194690, guid: 4117cd896e709a847841be2013d786ea, type: 3}
+  m_Parent: {fileID: 2100000, guid: 0509657d0cb326642a2a37d10a90f7aa, type: 2}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _ALPHATEST_ON
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap:
+    RenderType: TransparentCutout
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _Alpha_Clip: 0.035
+    - _Alpha_Clip_In_The_Distance: 1
+    - _Bottom_Color_Strength: 0.76
+    - _ColorBreakupBlend: 0.39
+    - _ColorBreakupStrength: 0.217
+    - _Color_Strength: 0
+    - _Curvature: 0.37
+    - _Custom_Normals_Strength: 1
+    - _Dry_Grass_Smoothness: 0.2
+    - _Fresnel: 1
+    - _Fresnel_In_Shade: 0
+    - _Fresnel_Power: 20
+    - _Fresnel_Strength: 0.2
+    - _Global_Wind_Strength: 0.199
+    - _Grass_Dry_Opacity: 0.358
+    - _Grass_Healthy_Opacity: 0
+    - _HUE_Offset: 0
+    - _Normal_Strength: 0.586
+    - _Side_To_side_Wind: 59.3
+    - _Smoothness: 0.366
+    - _Thickness: 1.63
+    - _Thickness_Bottom_Strength: 1
+    - _Tiny_Wind_Strength: 0.525
+    - _Tip_Color_Strength: 1
+    - _Use_Vertex_Colors_For_Wind: 0
+    m_Colors:
+    - _Bottom_Color_Gradient_Remap: {r: 1.63, g: 3.28, b: 0, a: 0}
+    - _Color: {r: 0.85660374, g: 0.42072642, b: 0.15354209, a: 1}
+    - _Color_Bottom: {r: 0.23137257, g: 0.4862745, b: 0.3950763, a: 1}
+    - _Color_Tip: {r: 0.7837992, g: 1, b: 0.4901961, a: 0}
+    - _Grass_Dry: {r: 0.80565464, g: 1, b: 0.21568626, a: 0}
+    - _Grass_Health_Noise_Tilling: {r: 0.01, g: 0.01, b: 0, a: 0}
+    - _Grass_Healthy: {r: 1, g: 0.14901961, b: 0.101960786, a: 0}
+    - _Near_Far_Range: {r: 50, g: 90, b: 0, a: 0}
+    - _Tip_Color_Gradient_Remap: {r: 1.59, g: 2.57, b: 0, a: 0}
+    - _Translucensy_Color: {r: 0.6979619, g: 1, b: 0.28627455, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

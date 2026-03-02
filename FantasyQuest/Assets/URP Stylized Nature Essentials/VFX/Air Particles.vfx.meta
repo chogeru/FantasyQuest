@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 4e2313e2f1341cf47a57396559136231
+VisualEffectImporter:
+  externalObjects: {}
+  serializedVersion: 1
+  template:
+    name: 
+    category: 
+    description: 
+    icon: {instanceID: 0}
+    thumbnail: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 318404
+  packageName: Adventure Nature Vol. 2
+  packageVersion: 1.0.1
+  assetPath: Assets/UPR_Lite_SE/VFX/Air Particles.vfx
+  uploadId: 752857
