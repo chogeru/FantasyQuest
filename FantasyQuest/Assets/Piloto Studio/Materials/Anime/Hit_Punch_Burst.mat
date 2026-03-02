@@ -135,7 +135,6 @@ Material:
     - _FresnelPower: 1
     - _FresnelScale: 1
     - _InvFade: 1
-    - _Invert_Fresnel: 0
     - _MiddlePointPos: 0.5
     - _MiddlePointPos1: 0.5
     - _MultiplyNoiseDesaturation: 0
