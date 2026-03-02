@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: c3b94482116b37743a8d06aae759524a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 281577
+  packageName: 'BoZo: Stylized Modular Characters Base Pack'
+  packageVersion: 1.4
+  assetPath: Assets/BoZo_ModularAnimeCharacters/Scripts/OutfitFollowBlendShapes.cs
+  uploadId: 728640

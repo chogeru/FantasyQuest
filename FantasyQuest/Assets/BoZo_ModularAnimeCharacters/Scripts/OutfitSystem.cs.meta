@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d2f80db1b30684148a99a14b59ad66ff
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 281577
+  packageName: 'BoZo: Stylized Modular Characters Base Pack'
+  packageVersion: 1.4
+  assetPath: Assets/BoZo_StylizedModularCharacters/Scripts/OutfitSystem.cs
+  uploadId: 728640

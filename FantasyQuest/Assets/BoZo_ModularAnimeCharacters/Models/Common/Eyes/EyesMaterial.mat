@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: EyesMaterial
+  m_Shader: {fileID: 4800000, guid: 4dede25c09a79bb49b62a737c00a3d9e, type: 3}
+  m_Parent: {fileID: 2100000, guid: c2051efd070775d4da809bf05e6691f7, type: 2}
+  m_ModifiedSerializedProperties: 4
+  m_ValidKeywords:
+  - _ALPHATEST_ON
+  - _USECUSTOMTEXTURE
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _DecalMap:
+        m_Texture: {fileID: 2800000, guid: 322594b7b381d56439437e102f177424, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LogoMap:
+        m_Texture: {fileID: 2800000, guid: 2669abb859f4dd94a9e2d86647ba29a8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PatternMap:
+        m_Texture: {fileID: 2800000, guid: 8cfe9bff65c6ef14d84858f0b7d17e86, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2D:
+        m_Texture: {fileID: 2800000, guid: 5f2e73995ee8e8e41b9e54da3a58baf6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaClip: 1
+    - _AlphaToMask: 1
+    - _DecalBlend: 0
+    - _DecalUVSet: 0
+    - _Fresnel: 0.5
+    - _LightHeightDirectionStrength: 0
+    - _OutlineDistance: -16.33
+    - _PatternBlend: 0
+    - _PatternUVSet: 1
+    - _UseMaskMap: 0
+    - _UseNormalMap: 0
+    - _UseOutline: 0
+    m_Colors:
+    - _Color_1: {r: 1, g: 0.38522008, b: 0.20440245, a: 0}
+    - _Color_2: {r: 0, g: 0, b: 0, a: 0}
+    - _Color_3: {r: 0.26415092, g: 0.017987002, b: 0, a: 0}
+    - _Color_4: {r: 1, g: 1, b: 1, a: 0}
+    - _DecalColor_1: {r: 1, g: 1, b: 1, a: 0}
+    - _DecalColor_2: {r: 0, g: 0, b: 0, a: 0}
+    - _DecalColor_3: {r: 1, g: 1, b: 1, a: 0}
+    - _LogoColor_1: {r: 1, g: 1, b: 1, a: 0}
+    - _LogoScale: {r: 1, g: 1, b: 0, a: 0}
+    - _OutlineColor: {r: 1, g: 0, b: 0, a: 1}
+    - _PatternColor_1: {r: 1, g: 1, b: 1, a: 1}
+    - _PatternColor_2: {r: 1, g: 1, b: 1, a: 1}
+    - _PatternColor_3: {r: 1, g: 1, b: 1, a: 1}
+    - _PatternScale: {r: 1, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []
+--- !u!114 &7575693170033426517
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 9

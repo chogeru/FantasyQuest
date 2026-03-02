@@ -1,0 +1,178 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8265531417728609423
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6817399029466885868}
+  - component: {fileID: 5300737705016418930}
+  m_Layer: 0
+  m_Name: HairBack_WildLocks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6817399029466885868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8265531417728609423}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8253768419446668305}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5300737705016418930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8265531417728609423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7037b834b566fc74a89dd568bf82082f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customShader: 0
+  AttachInEditMode: 0
+  OutfitName: Wild Locks
+  OutfitIcon: {fileID: 21300000, guid: 8da9fc48995eb4941b1151cdd9964516, type: 3}
+  ColorChannels:
+  - Base
+  - Tips
+  TextureCatagory: 
+  supportDecals: 0
+  supportPatterns: 0
+  showCharacterCreator: 1
+  Type: {fileID: 11400000, guid: 52a5a48732f0b2e4cbc99ff72ef22bb5, type: 2}
+  AttachPoint: head
+  defaultColors: []
+  tags: []
+  LinkedColorSets: []
+  IncompatibleSets: []
+  currentSwatch: 0
+  outfitSwatches: []
+  originalBones: []
+  originalRootBone: {fileID: 0}
+  editorAttachPoint: {fileID: 0}
+--- !u!1001 &8431301284179074042
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6817399029466885868}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: ce82285b02fd1c341b19dffa96d05d85,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ce82285b02fd1c341b19dffa96d05d85,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ce82285b02fd1c341b19dffa96d05d85,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ce82285b02fd1c341b19dffa96d05d85,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ce82285b02fd1c341b19dffa96d05d85,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ce82285b02fd1c341b19dffa96d05d85,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ce82285b02fd1c341b19dffa96d05d85,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ce82285b02fd1c341b19dffa96d05d85,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ce82285b02fd1c341b19dffa96d05d85,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ce82285b02fd1c341b19dffa96d05d85,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: ce82285b02fd1c341b19dffa96d05d85,
+        type: 3}
+      propertyPath: m_DirtyAABB
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: ce82285b02fd1c341b19dffa96d05d85,
+        type: 3}
+      propertyPath: m_AABB.m_Center.x
+      value: 0.018941209
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: ce82285b02fd1c341b19dffa96d05d85,
+        type: 3}
+      propertyPath: m_AABB.m_Center.y
+      value: 0.13774428
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: ce82285b02fd1c341b19dffa96d05d85,
+        type: 3}
+      propertyPath: m_AABB.m_Center.z
+      value: -0.031764198
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: ce82285b02fd1c341b19dffa96d05d85,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.x
+      value: 0.19810508
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: ce82285b02fd1c341b19dffa96d05d85,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.y
+      value: 0.18359008
+      objectReference: {fileID: 0}
+    - target: {fileID: -3887185075125053422, guid: ce82285b02fd1c341b19dffa96d05d85,
+        type: 3}
+      propertyPath: m_AABB.m_Extent.z
+      value: 0.12861498
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ce82285b02fd1c341b19dffa96d05d85,
+        type: 3}
+      propertyPath: m_Name
+      value: HairBack_WildLocks
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ce82285b02fd1c341b19dffa96d05d85, type: 3}
+--- !u!4 &8253768419446668305 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ce82285b02fd1c341b19dffa96d05d85,
+    type: 3}
+  m_PrefabInstance: {fileID: 8431301284179074042}
+  m_PrefabAsset: {fileID: 0}

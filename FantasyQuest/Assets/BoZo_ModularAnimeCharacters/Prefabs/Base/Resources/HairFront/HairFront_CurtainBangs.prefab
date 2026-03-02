@@ -1,0 +1,177 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2693887867549634157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3031549021756242688}
+  - component: {fileID: 3548925344229131311}
+  - component: {fileID: 4445643924712882398}
+  m_Layer: 0
+  m_Name: HairFront_CurtainBangs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3031549021756242688
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2693887867549634157}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7647863686696952900}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3548925344229131311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2693887867549634157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7037b834b566fc74a89dd568bf82082f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customShader: 0
+  AttachInEditMode: 0
+  OutfitName: Curtain Bangs
+  OutfitIcon: {fileID: 21300000, guid: c855f1dd6d43b1c45a92c634ce0d7203, type: 3}
+  ColorChannels:
+  - Base
+  - Tips
+  - Shine
+  TextureCatagory: 
+  supportDecals: 0
+  supportPatterns: 0
+  showCharacterCreator: 1
+  Type: {fileID: 11400000, guid: 736d0fa537fb51945929fa173dcaea59, type: 2}
+  AttachPoint: head
+  defaultColors: []
+  tags: []
+  LinkedColorSets: []
+  IncompatibleSets: []
+  currentSwatch: 0
+  outfitSwatches: []
+  originalBones: []
+  originalRootBone: {fileID: 0}
+  editorAttachPoint: {fileID: 0}
+--- !u!114 &4445643924712882398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2693887867549634157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d2d34769e54eb14398b24dc32eea2c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+  rootBones:
+  - {fileID: 1313080129540012514}
+  - {fileID: 5486689884803955207}
+  collisionSize: 0.025
+  influenceMap: {fileID: 0}
+  reductionSetting: 0
+  clothPreset: {fileID: 0}
+--- !u!1001 &7901586427254866863
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3031549021756242688}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: eecc71b247df7be4a9a955e5dedbe130,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eecc71b247df7be4a9a955e5dedbe130,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eecc71b247df7be4a9a955e5dedbe130,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eecc71b247df7be4a9a955e5dedbe130,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eecc71b247df7be4a9a955e5dedbe130,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eecc71b247df7be4a9a955e5dedbe130,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eecc71b247df7be4a9a955e5dedbe130,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eecc71b247df7be4a9a955e5dedbe130,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eecc71b247df7be4a9a955e5dedbe130,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: eecc71b247df7be4a9a955e5dedbe130,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: eecc71b247df7be4a9a955e5dedbe130,
+        type: 3}
+      propertyPath: m_Name
+      value: HairFront_CurtainBangs
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eecc71b247df7be4a9a955e5dedbe130, type: 3}
+--- !u!4 &1313080129540012514 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -31263968818873779, guid: eecc71b247df7be4a9a955e5dedbe130,
+    type: 3}
+  m_PrefabInstance: {fileID: 7901586427254866863}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5486689884803955207 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2417502387169458600, guid: eecc71b247df7be4a9a955e5dedbe130,
+    type: 3}
+  m_PrefabInstance: {fileID: 7901586427254866863}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7647863686696952900 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: eecc71b247df7be4a9a955e5dedbe130,
+    type: 3}
+  m_PrefabInstance: {fileID: 7901586427254866863}
+  m_PrefabAsset: {fileID: 0}

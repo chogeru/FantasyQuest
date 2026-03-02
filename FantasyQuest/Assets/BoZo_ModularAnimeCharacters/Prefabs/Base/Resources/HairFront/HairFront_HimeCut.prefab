@@ -1,0 +1,184 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5221580026383580036
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1505977066920667622}
+  - component: {fileID: 3387420200849609926}
+  - component: {fileID: 570646094175627158}
+  m_Layer: 0
+  m_Name: HairFront_HimeCut
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1505977066920667622
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5221580026383580036}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6062937914210030439}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3387420200849609926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5221580026383580036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7037b834b566fc74a89dd568bf82082f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customShader: 0
+  AttachInEditMode: 0
+  OutfitName: Hime Cut
+  OutfitIcon: {fileID: 21300000, guid: e533b817f7897e34c8f4466add918413, type: 3}
+  ColorChannels:
+  - Base
+  - Tips
+  - Shine
+  TextureCatagory: 
+  supportDecals: 0
+  supportPatterns: 0
+  showCharacterCreator: 1
+  Type: {fileID: 11400000, guid: 736d0fa537fb51945929fa173dcaea59, type: 2}
+  AttachPoint: head
+  defaultColors: []
+  tags: []
+  LinkedColorSets: []
+  IncompatibleSets: []
+  currentSwatch: 0
+  outfitSwatches: []
+  originalBones: []
+  originalRootBone: {fileID: 0}
+  editorAttachPoint: {fileID: 0}
+--- !u!114 &570646094175627158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5221580026383580036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d2d34769e54eb14398b24dc32eea2c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+  rootBones:
+  - {fileID: 4949168648241903407}
+  - {fileID: 6655469437665987917}
+  - {fileID: 4133965329012076232}
+  collisionSize: 0.025
+  influenceMap: {fileID: 0}
+  reductionSetting: 0
+  clothPreset: {fileID: 4900000, guid: 433936ba35faf404f921f4a7966526f1, type: 3}
+--- !u!1001 &6028446975349879948
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1505977066920667622}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 2b03d0cc04caafb4aaa31ace39519607,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2b03d0cc04caafb4aaa31ace39519607,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2b03d0cc04caafb4aaa31ace39519607,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2b03d0cc04caafb4aaa31ace39519607,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2b03d0cc04caafb4aaa31ace39519607,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2b03d0cc04caafb4aaa31ace39519607,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2b03d0cc04caafb4aaa31ace39519607,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2b03d0cc04caafb4aaa31ace39519607,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2b03d0cc04caafb4aaa31ace39519607,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 2b03d0cc04caafb4aaa31ace39519607,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2b03d0cc04caafb4aaa31ace39519607,
+        type: 3}
+      propertyPath: m_Name
+      value: HairFront_HimeCut
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2b03d0cc04caafb4aaa31ace39519607, type: 3}
+--- !u!4 &4133965329012076232 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7707790940786285124, guid: 2b03d0cc04caafb4aaa31ace39519607,
+    type: 3}
+  m_PrefabInstance: {fileID: 6028446975349879948}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4949168648241903407 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1659473368085463971, guid: 2b03d0cc04caafb4aaa31ace39519607,
+    type: 3}
+  m_PrefabInstance: {fileID: 6028446975349879948}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6062937914210030439 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2b03d0cc04caafb4aaa31ace39519607,
+    type: 3}
+  m_PrefabInstance: {fileID: 6028446975349879948}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6655469437665987917 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1150004111505963457, guid: 2b03d0cc04caafb4aaa31ace39519607,
+    type: 3}
+  m_PrefabInstance: {fileID: 6028446975349879948}
+  m_PrefabAsset: {fileID: 0}
