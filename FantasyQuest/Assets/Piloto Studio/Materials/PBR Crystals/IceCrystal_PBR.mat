@@ -28,7 +28,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 5
+  version: 7
 --- !u!114 &-5772885120678187329
 MonoBehaviour:
   m_ObjectHideFlags: 11
@@ -50,13 +50,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: IceCrystal_PBR
-  m_Shader: {fileID: -6465566751694194690, guid: fcf523d8a34f0cf41b1e42f5a48768ad,
-    type: 3}
-  m_ValidKeywords:
-  - _ALPHATEST_ON
+  m_Shader: {fileID: -6465566751694194690, guid: fcf523d8a34f0cf41b1e42f5a48768ad, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - _DISABLE_SSR
   - _DISABLE_SSR_TRANSPARENT
-  m_InvalidKeywords:
   - _NORMALMAP_TANGENT_SPACE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -64,13 +64,13 @@ Material:
   m_CustomRenderQueue: 2475
   stringTagMap:
     MotionVector: User
-    RenderType: TransparentCutout
   disabledShaderPasses:
   - MOTIONVECTORS
   - TransparentDepthPostpass
   - TransparentBackface
   - RayTracingPrepass
   - TransparentDepthPrepass
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -162,7 +162,7 @@ Material:
     - _OpaqueCullMode: 2
     - _ParallaxAmplitude: 20
     - _ParallaxSteps: 30
-    - _QueueControl: -1
+    - _QueueControl: 1
     - _QueueOffset: 0
     - _RayTracing: 0
     - _ReceiveShadows: 1
