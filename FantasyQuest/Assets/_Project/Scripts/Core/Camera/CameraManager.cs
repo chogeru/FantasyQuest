@@ -16,8 +16,8 @@ namespace Project.Core.CameraSystem
         [Header("Settings")]
         [SerializeField] private float _defaultDistance = 4.5f;
         [SerializeField] private float _height = 1.5f;
-        [SerializeField] private float _sensitivityX = 2f;
-        [SerializeField] private float _sensitivityY = 2f;
+        [SerializeField] private float _sensitivityX = 0.5f;
+        [SerializeField] private float _sensitivityY = 0.5f;
 
         [Header("Collision (壁のめり込み防止)")]
         [SerializeField] private LayerMask _collisionLayer;
@@ -28,6 +28,12 @@ namespace Project.Core.CameraSystem
         private float _currentPitch;
         private float _currentYaw;
         private float _currentDistance;
+        private Transform _lockOnTarget;
+
+        public void SetLockOnTarget(Transform target)
+        {
+            _lockOnTarget = target;
+        }
 
         private void Awake()
         {
@@ -65,9 +71,34 @@ namespace Project.Core.CameraSystem
         {
             if (_target == null) return;
 
-            // 回転計算
-            _currentYaw += _lookInput.x * _sensitivityX;
-            _currentPitch -= _lookInput.y * _sensitivityY;
+            if (_lockOnTarget != null)
+            {
+                // ロックオン中の自動カメラ操作
+                // ターゲットの少し上を注視する
+                Vector3 targetAimPoint = _lockOnTarget.position + Vector3.up * 1.0f;
+                // プレイヤー側の基準点
+                Vector3 myPivot = _target.position + Vector3.up * _height;
+                
+                Vector3 dirToTarget = (targetAimPoint - myPivot).normalized;
+                if (dirToTarget != Vector3.zero)
+                {
+                    Quaternion lookRot = Quaternion.LookRotation(dirToTarget);
+                    
+                    // Yaw (Y軸回転) のスムーズな追従
+                    _currentYaw = Mathf.LerpAngle(_currentYaw, lookRot.eulerAngles.y, Time.deltaTime * 10f);
+                    
+                    // Pitch (X軸回転) のスムーズな追従
+                    float targetPitch = lookRot.eulerAngles.x;
+                    if (targetPitch > 180f) targetPitch -= 360f;
+                    _currentPitch = Mathf.LerpAngle(_currentPitch, targetPitch, Time.deltaTime * 10f);
+                }
+            }
+            else
+            {
+                // 通常時のマウスによる回転計算
+                _currentYaw += _lookInput.x * _sensitivityX;
+                _currentPitch -= _lookInput.y * _sensitivityY;
+            }
             
             // 見上げ・見下ろしの角度制限
             _currentPitch = Mathf.Clamp(_currentPitch, -60f, 60f);

@@ -80,7 +80,10 @@ namespace Project.Core.CameraSystem
                 _checkTimer = CHECK_INTERVAL;
                 Debug.Log($"[TargetLockOn] {_currentTarget.name} をロックオン！");
                 
-                // CameraManager へ注視対象の変更を要請する処理などを記述
+                if (_cameraManager != null)
+                {
+                    _cameraManager.SetLockOnTarget(_currentTarget);
+                }
             }
         }
 
@@ -98,6 +101,11 @@ namespace Project.Core.CameraSystem
             _isLockedOn = false;
             _currentTarget = null;
             Debug.Log("[TargetLockOn] ロックオン解除");
+
+            if (_cameraManager != null)
+            {
+                _cameraManager.SetLockOnTarget(null);
+            }
         }
 
         public Transform GetTarget() => _currentTarget;

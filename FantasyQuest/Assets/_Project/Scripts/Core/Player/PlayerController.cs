@@ -1,5 +1,6 @@
 using Project.Systems.Input;
 using UnityEngine;
+using Project.Core.CameraSystem;
 
 namespace Project.Core.Player
 {
@@ -17,6 +18,7 @@ namespace Project.Core.Player
         
         private CharacterController _controller;
         private PlayerStateMachine _stateMachine; // 追加：ステートマシン参照
+        private TargetLockOn _targetLockOn;
 
         [Header("Movement Settings")]
         [SerializeField] private float _walkSpeed = 3f;
@@ -54,6 +56,7 @@ namespace Project.Core.Player
         {
             _controller = GetComponent<CharacterController>();
             _stateMachine = GetComponent<PlayerStateMachine>();
+            _targetLockOn = GetComponent<TargetLockOn>();
             
             if (_cameraTransform == null && Camera.main != null)
             {
@@ -117,7 +120,6 @@ namespace Project.Core.Player
             if (_isGrounded)
             {
                 _coyoteCounter = _coyoteTime;
-                if (_verticalVelocity < 0.0f) _verticalVelocity = -2f;
             }
             else
             {
@@ -135,6 +137,11 @@ namespace Project.Core.Player
         {
             _jumpBufferCounter -= Time.deltaTime;
 
+            if (_isGrounded && _verticalVelocity < 0)
+            {
+                _verticalVelocity = -2f; // Ground stick force
+            }
+
             // ジャンプ処理
             if (_coyoteCounter > 0f && !_isSliding && _stateMachine.CanMove) 
             {
@@ -145,11 +152,10 @@ namespace Project.Core.Player
                     _coyoteCounter = 0f;
                 }
             }
-            else
-            {
-                float currentGravity = _verticalVelocity < 0 ? _gravity * _fallMultiplier : _gravity;
-                _verticalVelocity += currentGravity * Time.deltaTime;
-            }
+
+            // 重力の適用 (常に毎フレーム適用する)
+            float currentGravity = _verticalVelocity < 0 ? _gravity * _fallMultiplier : _gravity;
+            _verticalVelocity += currentGravity * Time.deltaTime;
         }
 
         private void HandleMovement()
@@ -164,22 +170,55 @@ namespace Project.Core.Player
 
             if (_isSliding)
             {
+                // 急斜面では滑り落ちる（垂直方向の力も含む）
                 movement = new Vector3(_hitNormal.x, -_hitNormal.y, _hitNormal.z) * _slopeSlideSpeed;
             }
-            else if (_moveInput != Vector2.zero)
+            else
             {
-                Vector3 inputDir = new Vector3(_moveInput.x, 0f, _moveInput.y).normalized;
-                _targetRotation = Mathf.Atan2(inputDir.x, inputDir.z) * Mathf.Rad2Deg + _cameraTransform.eulerAngles.y;
+                if (_targetLockOn != null && _targetLockOn.IsLockedOn)
+                {
+                    // ロックオン状態：ターゲットの方向を向き続ける
+                    Transform target = _targetLockOn.GetTarget();
+                    if (target != null)
+                    {
+                        Vector3 dirToTarget = (target.position - transform.position).normalized;
+                        dirToTarget.y = 0;
+                        if (dirToTarget != Vector3.zero)
+                        {
+                            Quaternion lookRot = Quaternion.LookRotation(dirToTarget);
+                            transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 15f);
+                        }
+                    }
 
-                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, _rotationSmoothTime);
-                transform.rotation = Quaternion.Euler(0f, rotation, 0f);
+                    if (_moveInput != Vector2.zero)
+                    {
+                        // カメラを基準として入力方向へ移動（カニ歩き/ストレイフ）
+                        Vector3 inputDir = new Vector3(_moveInput.x, 0f, _moveInput.y).normalized;
+                        _targetRotation = Mathf.Atan2(inputDir.x, inputDir.z) * Mathf.Rad2Deg + _cameraTransform.eulerAngles.y;
+                        
+                        Vector3 moveDirection = Quaternion.Euler(0f, _targetRotation, 0f) * Vector3.forward;
+                        float currentSpeed = _isSprinting ? _sprintSpeed : _walkSpeed;
+                        movement = moveDirection * currentSpeed;
+                    }
+                }
+                else if (_moveInput != Vector2.zero)
+                {
+                    // 通常状態：入力方向にキャラクターを回転させて移動
+                    Vector3 inputDir = new Vector3(_moveInput.x, 0f, _moveInput.y).normalized;
+                    _targetRotation = Mathf.Atan2(inputDir.x, inputDir.z) * Mathf.Rad2Deg + _cameraTransform.eulerAngles.y;
 
-                Vector3 moveDirection = Quaternion.Euler(0f, _targetRotation, 0f) * Vector3.forward;
-                float currentSpeed = _isSprinting ? _sprintSpeed : _walkSpeed;
-                movement = moveDirection * currentSpeed;
+                    float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity, _rotationSmoothTime);
+                    transform.rotation = Quaternion.Euler(0f, rotation, 0f);
+
+                    Vector3 moveDirection = Quaternion.Euler(0f, _targetRotation, 0f) * Vector3.forward;
+                    float currentSpeed = _isSprinting ? _sprintSpeed : _walkSpeed;
+                    movement = moveDirection * currentSpeed;
+                }
+
+                // 重力を適用（平地・空中・普通の坂道）
+                movement.y = _verticalVelocity;
             }
 
-            movement.y = _verticalVelocity;
             _controller.Move(movement * Time.deltaTime);
         }
 
