@@ -52,6 +52,20 @@ namespace Project.Core.Player
         private Vector2 _moveInput;
         private bool _isSprinting;
 
+        // --- Properties & Events for Animation & External use ---
+        public float CurrentSpeed 
+        {
+            get
+            {
+                if (_controller != null) 
+                    return new Vector3(_controller.velocity.x, 0, _controller.velocity.z).magnitude;
+                return 0f;
+            }
+        }
+        public bool IsGrounded => _isGrounded;
+        public float VerticalVelocity => _verticalVelocity;
+        public event System.Action OnJumpExecuted;
+
         private void Awake()
         {
             _controller = GetComponent<CharacterController>();
@@ -150,6 +164,7 @@ namespace Project.Core.Player
                     _verticalVelocity = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
                     _jumpBufferCounter = 0f;
                     _coyoteCounter = 0f;
+                    OnJumpExecuted?.Invoke();
                 }
             }
 
