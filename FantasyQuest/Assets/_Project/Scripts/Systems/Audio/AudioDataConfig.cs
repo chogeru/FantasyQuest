@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using Sirenix.OdinInspector;
 
 namespace Project.Systems.Audio
@@ -8,42 +9,66 @@ namespace Project.Systems.Audio
     public class AudioDataConfig : SerializedScriptableObject
     {
         [System.Serializable]
-        public class AudioEntry
+        public class BGMEntry
         {
-            [HideLabel, HorizontalGroup("Entry")]
-            public AudioClip clip;
+            [LabelText("Intro Clip (Optional)")]
+            [Tooltip("イントロ部分のクリップ。これが終わるとMain Loop Clipに移行します。")]
+            public AudioClip introClip;
 
-            [LabelText("Vol"), Range(0f, 1f), HorizontalGroup("Entry", Width = 100)]
+            [LabelText("Main Loop Clip")]
+            [Required]
+            public AudioClip mainLoopClip;
+
+            [LabelText("Vol"), Range(0f, 1f)]
             public float defaultVolume = 1f;
         }
 
-        [InfoBox("ID(文字列)をキーにして各オーディオを管理します。")]
+        [System.Serializable]
+        public class SEEntry
+        {
+            [Required]
+            public AudioClip clip;
+
+            [LabelText("Vol"), Range(0f, 1f)]
+            public float defaultVolume = 1f;
+
+            [LabelText("Random Pitch")]
+            [Tooltip("再生時にピッチをランダムに変動させます。足音などに有効です。")]
+            public bool useRandomPitch = false;
+
+            [ShowIf("useRandomPitch")]
+            [MinMaxSlider(0.5f, 1.5f, true)]
+            public Vector2 pitchRange = new Vector2(0.9f, 1.1f);
+        }
+
+        [TitleGroup("Mixer Settings")]
+        [InfoBox("AudioMixerGroupを指定しない場合はデフォルト経路で再生されます。")]
+        public AudioMixerGroup bgmMixerGroup;
+        public AudioMixerGroup seMixerGroup;
+
         [TitleGroup("Background Music Settings")]
+        [InfoBox("ID(文字列)をキーにして各オーディオを管理します。")]
         [DictionaryDrawerSettings(KeyLabel = "BGM ID", ValueLabel = "Audio Data", DisplayMode = DictionaryDisplayOptions.ExpandedFoldout)]
-        public Dictionary<string, AudioEntry> bgmDictionary = new Dictionary<string, AudioEntry>();
+        public Dictionary<string, BGMEntry> bgmDictionary = new Dictionary<string, BGMEntry>();
 
         [TitleGroup("Sound Effect Settings")]
         [DictionaryDrawerSettings(KeyLabel = "SE ID", ValueLabel = "Audio Data", DisplayMode = DictionaryDisplayOptions.ExpandedFoldout)]
-        public Dictionary<string, AudioEntry> seDictionary = new Dictionary<string, AudioEntry>();
+        public Dictionary<string, SEEntry> seDictionary = new Dictionary<string, SEEntry>();
 
-        public AudioClip GetBGMClip(string id, out float volume)
+        public BGMEntry GetBGMEntry(string id)
         {
-            volume = 1f;
-            if (bgmDictionary.TryGetValue(id, out AudioEntry entry))
+            if (bgmDictionary.TryGetValue(id, out BGMEntry entry))
             {
-                volume = entry.defaultVolume;
-                return entry.clip;
+                return entry;
             }
             return null;
         }
 
-        public AudioClip GetSEClip(string id, out float volume)
+        public SEEntry GetSEEntry(string id)
         {
-            volume = 1f;
-            if (seDictionary.TryGetValue(id, out AudioEntry entry))
+            if (seDictionary.TryGetValue(id, out SEEntry entry))
             {
-                volume = entry.defaultVolume;
-                return entry.clip;
+                return entry;
             }
             return null;
         }
