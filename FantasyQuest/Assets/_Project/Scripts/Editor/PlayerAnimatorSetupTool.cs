@@ -24,6 +24,10 @@ namespace Project.Editor
         [Tooltip("ジャンプ上昇モーション (VerticalVelocity = 5)")]
         public AnimationClip jumpRisingClip;
 
+        [Header("Swimming (泳ぎ)")]
+        [Tooltip("泳ぎモーション")]
+        public AnimationClip swimClip;
+
         [Header("Combat (攻撃)")]
         [Tooltip("基本の攻撃モーション")]
         public AnimationClip attackClip;
@@ -63,6 +67,7 @@ namespace Project.Editor
             controller.AddParameter("VerticalVelocity", AnimatorControllerParameterType.Float);
             controller.AddParameter("Jump", AnimatorControllerParameterType.Trigger);
             controller.AddParameter("Attack", AnimatorControllerParameterType.Trigger);
+            controller.AddParameter("IsSwimming", AnimatorControllerParameterType.Bool);
             controller.AddParameter("ComboStep", AnimatorControllerParameterType.Int);
 
             // ルートステートマシンを取得
@@ -94,9 +99,9 @@ namespace Project.Editor
             airBlendTree.blendParameter = "VerticalVelocity";
             airBlendTree.useAutomaticThresholds = false;
 
-            // 落下・上昇モーションを割り当て
-            airBlendTree.AddChild(fallClip, -5f);
-            airBlendTree.AddChild(jumpRisingClip, 5f);
+            // 落下・上昇モーションを割り当て (しきい値を狭くして最高地点でのブレンドを素早く切り替える)
+            airBlendTree.AddChild(fallClip, -0.1f);
+            airBlendTree.AddChild(jumpRisingClip, 0.1f);
 
             AssetDatabase.AddObjectToAsset(airBlendTree, controller);
             airState.motion = airBlendTree;
@@ -106,6 +111,13 @@ namespace Project.Editor
             if (attackClip != null)
             {
                 attackState.motion = attackClip;
+            }
+
+            // === 4. Swim (泳ぎ) ステートの作成 ===
+            AnimatorState swimState = rootStateMachine.AddState("Swim");
+            if (swimClip != null)
+            {
+                swimState.motion = swimClip;
             }
 
             // デフォルトステートをLocomotionに設定
@@ -136,12 +148,26 @@ namespace Project.Editor
             attackTransition.AddCondition(AnimatorConditionMode.If, 0, "Attack");
             attackTransition.hasExitTime = false;
             attackTransition.duration = 0.1f;
+            attackTransition.canTransitionToSelf = false; // 同じ状態への連続遷移を防ぐ
 
             // 5. Attack -> Locomotion (攻撃終了後)
             var finishAttackTransition = attackState.AddTransition(locomotionState);
             finishAttackTransition.hasExitTime = true; // クリップ終了まで待機
             finishAttackTransition.exitTime = 1f;  // アニメーションが100%終わった時点
             finishAttackTransition.duration = 0.2f; // 0.2秒かけてLocomotionにスッと戻る
+
+            // 6. Any -> Swim (水に入った時)
+            var swimTransition = rootStateMachine.AddAnyStateTransition(swimState);
+            swimTransition.AddCondition(AnimatorConditionMode.If, 0, "IsSwimming");
+            swimTransition.hasExitTime = false;
+            swimTransition.duration = 0.2f;
+            swimTransition.canTransitionToSelf = false;
+
+            // 7. Swim -> Locomotion (水から出た時)
+            var exitSwimTransition = swimState.AddTransition(locomotionState);
+            exitSwimTransition.AddCondition(AnimatorConditionMode.IfNot, 0, "IsSwimming");
+            exitSwimTransition.hasExitTime = false;
+            exitSwimTransition.duration = 0.2f;
 
             Debug.Log($"<color=green>[PlayerAnimatorSetupWizard] Animator Controllerが正常に生成されました: {path}</color>");
             

@@ -16,11 +16,14 @@ namespace Project.Core.Player
         public string VerticalVelocityParam = "VerticalVelocity";
         [Tooltip("ジャンプのトリガー名 (trigger)")]
         public string JumpTriggerParam = "Jump";
+        [Tooltip("水泳判定のパラメータ名 (bool)")]
+        public string IsSwimmingParam = "IsSwimming";
 
         [HideInInspector] public int SpeedHash;
         [HideInInspector] public int IsGroundedHash;
         [HideInInspector] public int VerticalVelocityHash;
         [HideInInspector] public int JumpTriggerHash;
+        [HideInInspector] public int IsSwimmingHash;
 
         public void Initialize()
         {
@@ -28,6 +31,7 @@ namespace Project.Core.Player
             IsGroundedHash = Animator.StringToHash(IsGroundedParam);
             VerticalVelocityHash = Animator.StringToHash(VerticalVelocityParam);
             JumpTriggerHash = Animator.StringToHash(JumpTriggerParam);
+            IsSwimmingHash = Animator.StringToHash(IsSwimmingParam);
         }
     }
 
@@ -81,6 +85,7 @@ namespace Project.Core.Player
             _animator.SetFloat(_animSettings.SpeedHash, _playerController.CurrentSpeed, _speedDampTime, Time.deltaTime);
             _animator.SetBool(_animSettings.IsGroundedHash, _playerController.IsGrounded);
             _animator.SetFloat(_animSettings.VerticalVelocityHash, _playerController.VerticalVelocity);
+            _animator.SetBool(_animSettings.IsSwimmingHash, _playerController.IsInWater);
         }
 
         private void HandleJump()

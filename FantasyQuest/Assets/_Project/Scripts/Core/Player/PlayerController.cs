@@ -16,6 +16,8 @@ namespace Project.Core.Player
         [SerializeField] private InputReader _inputReader;
         [SerializeField] private Transform _cameraTransform;
         
+        public InputReader GetInputReader() => _inputReader;
+        
         private CharacterController _controller;
         private PlayerStateMachine _stateMachine; // 追加：ステートマシン参照
         private TargetLockOn _targetLockOn;
@@ -28,11 +30,18 @@ namespace Project.Core.Player
         private float _rotationVelocity;
 
         [Header("Gravity & Jump")]
-        [SerializeField] private float _gravity = -9.81f;
-        [SerializeField] private float _jumpHeight = 1.3f;
-        [SerializeField] private float _fallMultiplier = 2.0f;
+        [SerializeField] private float _gravity = -20.0f;
+        [SerializeField] private float _jumpHeight = 2.0f;
+        [SerializeField] private float _fallMultiplier = 2.5f;
         [SerializeField] private LayerMask _groundLayer;
         [SerializeField] private Transform _groundCheck;
+
+        [Header("Water & Swimming Settings")]
+        [SerializeField] private LayerMask _waterLayer;
+        [SerializeField] private float _swimSpeed = 2.5f;
+        [SerializeField] private float _waterGravity = -1.5f;
+        [SerializeField] private float _swimUpForce = 4.0f;
+        private bool _isInWater;
 
         [Header("Advanced Feel Settings")]
         [Tooltip("崖っぷちで落ちた直後でも一瞬だけジャンプできる猶予時間")]
@@ -51,6 +60,7 @@ namespace Project.Core.Player
 
         private Vector2 _moveInput;
         private bool _isSprinting;
+        private float _jumpPhaseTimer; // ジャンプ直後の強制非接地タイマー
 
         // --- Properties & Events for Animation & External use ---
         public float CurrentSpeed 
@@ -63,6 +73,7 @@ namespace Project.Core.Player
             }
         }
         public bool IsGrounded => _isGrounded;
+        public bool IsInWater => _isInWater;
         public float VerticalVelocity => _verticalVelocity;
         public event System.Action OnJumpExecuted;
 
@@ -122,13 +133,31 @@ namespace Project.Core.Player
         // === Logic ===
         private void CheckGrounded()
         {
-            if (_groundCheck != null)
+            if (_jumpPhaseTimer > 0f)
             {
-                _isGrounded = Physics.CheckSphere(_groundCheck.position, 0.2f, _groundLayer, QueryTriggerInteraction.Ignore);
+                _jumpPhaseTimer -= Time.deltaTime;
+                _isGrounded = false;
+                _isInWater = false;
             }
             else
             {
-                _isGrounded = _controller.isGrounded;
+                if (_groundCheck != null)
+                {
+                    _isInWater = Physics.CheckSphere(transform.position + Vector3.up * 1f, 1f, _waterLayer, QueryTriggerInteraction.Collide);
+                    if (!_isInWater)
+                    {
+                        _isGrounded = Physics.CheckSphere(_groundCheck.position, 0.2f, _groundLayer, QueryTriggerInteraction.Ignore);
+                    }
+                    else
+                    {
+                        _isGrounded = false; // 水中では接地とみなさない
+                    }
+                }
+                else
+                {
+                    _isGrounded = _controller.isGrounded;
+                    _isInWater = false;
+                }
             }
 
             if (_isGrounded)
@@ -151,6 +180,24 @@ namespace Project.Core.Player
         {
             _jumpBufferCounter -= Time.deltaTime;
 
+            if (_isInWater)
+            {
+                // 水中の浮力と重力
+                if (_verticalVelocity < _waterGravity) 
+                    _verticalVelocity = Mathf.Lerp(_verticalVelocity, _waterGravity, Time.deltaTime * 5f);
+                else
+                    _verticalVelocity -= 2f * Time.deltaTime; // 軽い水中重力
+
+                // 水中ジャンプ（上昇）
+                if (_jumpBufferCounter > 0f && _stateMachine.CanMove) 
+                {
+                    _verticalVelocity = _swimUpForce;
+                    _jumpBufferCounter = 0f;
+                    OnJumpExecuted?.Invoke();
+                }
+                return;
+            }
+
             if (_isGrounded && _verticalVelocity < 0)
             {
                 _verticalVelocity = -2f; // Ground stick force
@@ -164,6 +211,7 @@ namespace Project.Core.Player
                     _verticalVelocity = Mathf.Sqrt(_jumpHeight * -2f * _gravity);
                     _jumpBufferCounter = 0f;
                     _coyoteCounter = 0f;
+                    _jumpPhaseTimer = 0.1f; // ジャンプ直後の0.1秒間は接地判定を無効化
                     OnJumpExecuted?.Invoke();
                 }
             }
@@ -212,7 +260,7 @@ namespace Project.Core.Player
                         _targetRotation = Mathf.Atan2(inputDir.x, inputDir.z) * Mathf.Rad2Deg + _cameraTransform.eulerAngles.y;
                         
                         Vector3 moveDirection = Quaternion.Euler(0f, _targetRotation, 0f) * Vector3.forward;
-                        float currentSpeed = _isSprinting ? _sprintSpeed : _walkSpeed;
+                        float currentSpeed = _isInWater ? _swimSpeed : (_isSprinting ? _sprintSpeed : _walkSpeed);
                         movement = moveDirection * currentSpeed;
                     }
                 }
@@ -226,7 +274,7 @@ namespace Project.Core.Player
                     transform.rotation = Quaternion.Euler(0f, rotation, 0f);
 
                     Vector3 moveDirection = Quaternion.Euler(0f, _targetRotation, 0f) * Vector3.forward;
-                    float currentSpeed = _isSprinting ? _sprintSpeed : _walkSpeed;
+                    float currentSpeed = _isInWater ? _swimSpeed : (_isSprinting ? _sprintSpeed : _walkSpeed);
                     movement = moveDirection * currentSpeed;
                 }
 

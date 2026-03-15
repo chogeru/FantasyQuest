@@ -5,13 +5,21 @@ using Project.Core.Stats;
 
 namespace Project.Core.AI
 {
+    public enum EnemyMovementType
+    {
+        Land,
+        Water,
+        Air
+    }
+
     /// <summary>
     /// NavMeshAgentとEnemyStateMachineを利用した高度な敵AI。
-    /// （ブラッシュアップ第2弾：ひるみ、ノックバック、攻撃の予兆・硬直対応）
+    /// （ブラッシュアップ：水・陸・空の全ての敵をサポートする移動タイプを導入）
     /// </summary>
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(CharacterStats))]
     [RequireComponent(typeof(EnemyStateMachine))]
+    [RequireComponent(typeof(CharacterController))]
     public class EnemyAIController : MonoBehaviour
     {
         [Header("References")]
@@ -19,6 +27,7 @@ namespace Project.Core.AI
         private NavMeshAgent _agent;
         private CharacterStats _stats;
         private EnemyStateMachine _stateMachine;
+        private CharacterController _characterController;
         private Transform _targetPlayer;
 
         [Header("AI Settings")]
@@ -42,6 +51,21 @@ namespace Project.Core.AI
         [Tooltip("攻撃を振り抜いた後の「硬直(隙)」の時間")]
         [SerializeField] private float _attackRecoveryTime = 1.0f;
 
+        [Header("Movement Type Settings (水・陸・空対応)")]
+        [SerializeField] private EnemyMovementType _movementType = EnemyMovementType.Land;
+        [Tooltip("Land以外の移動速度")]
+        [SerializeField] private float _baseMoveSpeed = 3.5f; 
+        [Tooltip("Air時の浮遊高さの基準")]
+        [SerializeField] private float _flyHeight = 2.0f;
+
+        [Header("Gravity & Water Settings")]
+        [SerializeField] private float _gravity = -20f;
+        [SerializeField] private LayerMask _waterLayer;
+        [SerializeField] private float _swimSpeed = 2f;
+        [SerializeField] private float _waterGravity = -2f;
+        private float _verticalVelocity;
+        private bool _isInWater;
+
         private Vector3 _patrolTarget;
         private float _aiTickTimer;
         private const float AI_TICK_RATE = 0.2f;
@@ -51,6 +75,7 @@ namespace Project.Core.AI
             _agent = GetComponent<NavMeshAgent>();
             _stats = GetComponent<CharacterStats>();
             _stateMachine = GetComponent<EnemyStateMachine>();
+            _characterController = GetComponent<CharacterController>();
 
             // 死亡と被ダメージイベントを購読
             _stats.OnDeath += HandleDeath;
@@ -62,6 +87,16 @@ namespace Project.Core.AI
             var playerObj = GameObject.FindGameObjectWithTag("Player");
             if (playerObj != null) _targetPlayer = playerObj.transform;
 
+            _agent.updatePosition = false;
+            _agent.updateRotation = false;
+
+            if (_movementType != EnemyMovementType.Land)
+            {
+                // 空・水中の場合はNavMeshを使わない
+                _agent.enabled = false; 
+            }
+
+            _patrolTarget = transform.position;
             _stateMachine.ChangeState(EnemyState.Patrol);
         }
 
@@ -78,22 +113,84 @@ namespace Project.Core.AI
         {
             if (_stateMachine.CurrentState == EnemyState.Dead) return;
 
-            // 移動速度をアニメーターへ反映
-            if (_animator != null && _agent.enabled)
+            // 水の判定
+            _isInWater = Physics.CheckSphere(transform.position + Vector3.up * 1f, 1f, _waterLayer, QueryTriggerInteraction.Collide);
+
+            // 重力処理
+            if (_movementType == EnemyMovementType.Air)
             {
-                _animator.SetFloat("Speed", _agent.velocity.magnitude);
+                _verticalVelocity = 0f; // 飛行中は重力無視（ホバリング等必要ならここで微調整）
+            }
+            else if (_isInWater || _movementType == EnemyMovementType.Water)
+            {
+                // 水中あるいは水生生物
+                _verticalVelocity -= 2f * Time.deltaTime; // 軽い重力
+                if (_verticalVelocity < _waterGravity) _verticalVelocity = _waterGravity;
+            }
+            else
+            {
+                if (_characterController.isGrounded && _verticalVelocity < 0)
+                    _verticalVelocity = -2f;
+                else
+                    _verticalVelocity += _gravity * Time.deltaTime;
             }
 
             // ひるみ中や攻撃中（移動不可）の場合はAIの思考プロセスを一時停止する
             if (!_stateMachine.CanMove) 
             {
-                // エージェントを止める
-                if (_agent.enabled && _agent.isOnNavMesh) _agent.isStopped = true;
+                if (_movementType == EnemyMovementType.Land && _agent.enabled && _agent.isOnNavMesh) 
+                {
+                    _agent.isStopped = true;
+                }
+
+                // Air以外は重力だけ適用。Airはその場に留まる
+                float verticalMovement = (_movementType == EnemyMovementType.Air) ? 0f : _verticalVelocity;
+                _characterController.Move(new Vector3(0, verticalMovement, 0) * Time.deltaTime);
+                
+                if (_movementType == EnemyMovementType.Land) SyncAgentPosition();
                 return;
             }
 
             // 移動可能な状態ならエージェントを動かす
-            if (_agent.enabled && _agent.isOnNavMesh) _agent.isStopped = false;
+            if (_movementType == EnemyMovementType.Land && _agent.enabled && _agent.isOnNavMesh) 
+            {
+                _agent.isStopped = false;
+            }
+
+            Vector3 moveDirection = Vector3.zero;
+
+            // 移動処理
+            switch (_movementType)
+            {
+                case EnemyMovementType.Land:
+                    HandleLandMovement(ref moveDirection);
+                    break;
+                case EnemyMovementType.Water:
+                    HandleWaterMovement(ref moveDirection);
+                    break;
+                case EnemyMovementType.Air:
+                    HandleAirMovement(ref moveDirection);
+                    break;
+            }
+
+            // CCで実際に動かす
+            _characterController.Move(moveDirection * Time.deltaTime);
+
+            // アニメーターへ反映
+            if (_animator != null)
+            {
+                Vector3 horizontalVelocity = new Vector3(_characterController.velocity.x, 0, _characterController.velocity.z);
+                _animator.SetFloat("Speed", horizontalVelocity.magnitude);
+                // 水中かどうかのフラグ
+                _animator.SetBool("IsSwimming", _isInWater || _movementType == EnemyMovementType.Water);
+                // 空中かどうかのフラグ
+                _animator.SetBool("IsFlying", _movementType == EnemyMovementType.Air);
+            }
+
+            if (_movementType == EnemyMovementType.Land)
+            {
+                SyncAgentPosition();
+            }
 
             // AIの思考ポーリング（軽い処理）
             _aiTickTimer -= Time.deltaTime;
@@ -101,6 +198,110 @@ namespace Project.Core.AI
             {
                 _aiTickTimer = AI_TICK_RATE;
                 ExecuteAIState();
+            }
+        }
+
+        private void HandleLandMovement(ref Vector3 moveDirection)
+        {
+            if (_agent.enabled && _agent.hasPath)
+            {
+                Vector3 targetDirection = (_agent.steeringTarget - transform.position);
+                targetDirection.y = 0; // xz平面の方向
+                
+                if (targetDirection.magnitude > 0.1f)
+                {
+                    moveDirection = targetDirection.normalized * _agent.speed;
+                    
+                    // キャラクターの回転
+                    Quaternion lookRotation = Quaternion.LookRotation(targetDirection.normalized);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+                }
+            }
+            moveDirection.y += _verticalVelocity;
+        }
+
+        private void HandleWaterMovement(ref Vector3 moveDirection)
+        {
+            Vector3 targetDirection = GetSteeredDirection(_patrolTarget);
+            
+            if (_stateMachine.CurrentState == EnemyState.Chase && _targetPlayer != null)
+            {
+                targetDirection = GetSteeredDirection(_targetPlayer.position);
+            }
+            
+            if (targetDirection.magnitude > 0.1f)
+            {
+                moveDirection = targetDirection.normalized * _baseMoveSpeed;
+                
+                // 向いている方向を向く
+                Vector3 lookDir = targetDirection;
+                lookDir.y = 0;
+                if (lookDir != Vector3.zero)
+                {
+                    Quaternion lookRotation = Quaternion.LookRotation(lookDir.normalized);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+                }
+            }
+            moveDirection.y += _verticalVelocity;
+        }
+
+        private void HandleAirMovement(ref Vector3 moveDirection)
+        {
+            // 飛行エネミーのアプローチ。ターゲットの少し上を飛ぶイメージ
+            Vector3 targetPos = _patrolTarget;
+            
+            if (_stateMachine.CurrentState == EnemyState.Chase && _targetPlayer != null)
+            {
+                targetPos = _targetPlayer.position + Vector3.up * _flyHeight;
+            }
+
+            Vector3 targetDirection = GetSteeredDirection(targetPos);
+            
+            if (targetDirection.magnitude > 0.1f)
+            {
+                moveDirection = targetDirection.normalized * _baseMoveSpeed;
+                
+                // 回転
+                Vector3 lookDir = targetDirection;
+                lookDir.y = 0;
+                if (lookDir != Vector3.zero)
+                {
+                    Quaternion lookRotation = Quaternion.LookRotation(lookDir.normalized);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 進行方向に障害物がある場合、回避方向を合成して返す（水・空専用）
+        /// </summary>
+        private Vector3 GetSteeredDirection(Vector3 targetPos)
+        {
+            Vector3 desiredDir = (targetPos - transform.position).normalized;
+            Vector3 origin = transform.position + Vector3.up * 1f;
+            float avoidanceDistance = 3f;
+
+            // 前方に障害物があるかチェック
+            if (Physics.SphereCast(origin, 0.5f, transform.forward, out RaycastHit hit, avoidanceDistance, _obstacleLayer))
+            {
+                // 法線ベクトルを活用して障害物から離れる方向を算出
+                Vector3 avoidanceDir = Vector3.Reflect(transform.forward, hit.normal).normalized;
+                
+                // 完全な反射方向だと不自然なので、目標方向と回避方向をブレンド
+                // 距離が近いほど回避のウェイトを高める
+                float dodgeWeight = 1f - (hit.distance / avoidanceDistance);
+                Vector3 blendedDir = Vector3.Lerp(desiredDir, avoidanceDir, dodgeWeight).normalized;
+                return blendedDir;
+            }
+
+            return desiredDir;
+        }
+
+        private void SyncAgentPosition()
+        {
+            if (_agent.enabled)
+            {
+                _agent.nextPosition = transform.position;
             }
         }
 
@@ -156,11 +357,12 @@ namespace Project.Core.AI
             if (_animator != null) _animator.SetTrigger("Hurt"); // ひるみアニメーション
 
             // ノックバック処理 (プレイヤーとは逆方向に弾き飛ばす)
-            if (_targetPlayer != null && _agent.enabled && _agent.isOnNavMesh)
+            if (_targetPlayer != null)
             {
                 Vector3 knockbackDir = (transform.position - _targetPlayer.position).normalized;
-                // ナビメッシュ上を考慮して無理やりMoveする
-                _agent.Move(knockbackDir * _knockbackForce);
+                knockbackDir.y = 0;
+                // CCを使って弾き飛ばす
+                _characterController.Move(knockbackDir * _knockbackForce);
             }
 
             yield return new WaitForSeconds(_staggerDuration);
@@ -182,9 +384,22 @@ namespace Project.Core.AI
                 return;
             }
 
-            if (!_agent.hasPath || _agent.remainingDistance < 0.5f)
+            if (_movementType == EnemyMovementType.Land)
             {
-                _agent.SetDestination(GetRandomNavSphere(transform.position, _patrolRadius));
+                if (!_agent.hasPath || _agent.remainingDistance < 0.5f)
+                {
+                    _agent.SetDestination(GetRandomNavSphere(transform.position, _patrolRadius));
+                }
+            }
+            else
+            {
+                // 空中・水中パトロール用（シンプルなランダム座標移動）
+                if (Vector3.Distance(transform.position, _patrolTarget) < 1.0f || _patrolTarget == transform.position)
+                {
+                    Vector3 randDir = Random.insideUnitSphere * _patrolRadius;
+                    if (_movementType == EnemyMovementType.Water) randDir.y = 0; // 水中なら高さを変えない/水面を泳ぐかはお好み
+                    _patrolTarget = transform.position + randDir;
+                }
             }
         }
 
@@ -203,7 +418,10 @@ namespace Project.Core.AI
                 return;
             }
 
-            _agent.SetDestination(_targetPlayer.position);
+            if (_movementType == EnemyMovementType.Land && _agent.enabled)
+            {
+                _agent.SetDestination(_targetPlayer.position);
+            }
         }
 
         /// <summary>

@@ -20,6 +20,9 @@ namespace Project.Systems.Input
         
         // [追加] スプリントイベント
         public event Action<bool> OnSprintEvent = delegate { };
+        
+        // [追加] ロックオンイベント
+        public event Action OnLockOnEvent = delegate { };
 
         [Header("Actions")]
         [SerializeField] private InputActionAsset _inputActionAsset;
@@ -29,6 +32,7 @@ namespace Project.Systems.Input
         private InputAction _jumpAction;
         private InputAction _attackAction;
         private InputAction _sprintAction;
+        private InputAction _lockOnAction;
 
         private void OnEnable()
         {
@@ -47,6 +51,7 @@ namespace Project.Systems.Input
             _jumpAction = playerMap.FindAction("Jump");
             _attackAction = playerMap.FindAction("Attack");
             _sprintAction = playerMap.FindAction("Sprint");
+            _lockOnAction = playerMap.FindAction("LockOn");
 
             if (_moveAction != null)
             {
@@ -75,6 +80,11 @@ namespace Project.Systems.Input
             {
                 _sprintAction.performed += ctx => OnSprintEvent.Invoke(true);
                 _sprintAction.canceled += ctx => OnSprintEvent.Invoke(false);
+            }
+
+            if (_lockOnAction != null)
+            {
+                _lockOnAction.performed += ctx => OnLockOnEvent.Invoke();
             }
 
             EnablePlayerInput();

@@ -32,11 +32,29 @@ namespace Project.Core.Player
         private void Awake()
         {
             _stateMachine = GetComponent<PlayerStateMachine>();
+            if (_animator == null)
+            {
+                _animator = GetComponentInChildren<Animator>();
+            }
         }
 
         private void OnEnable()
         {
-            if (_inputReader != null) _inputReader.OnAttackEvent += HandleAttackInput;
+            // InputReaderのアタッチが漏れていた場合、自動的に修復を試みる
+            if (_inputReader == null)
+            {
+                var pc = GetComponent<PlayerController>();
+                if (pc != null) _inputReader = pc.GetInputReader();
+            }
+
+            if (_inputReader != null) 
+            {
+                _inputReader.OnAttackEvent += HandleAttackInput;
+            }
+            else
+            {
+                Debug.LogError("[CombatController] InputReaderが見つかりません！入力を受け付けられません。");
+            }
         }
 
         private void OnDisable()
@@ -61,6 +79,16 @@ namespace Project.Core.Player
                 if (_stateMachine.CanAttack || _stateMachine.CurrentState == PlayerState.Attacking)
                 {
                     TryExecuteAttack();
+                }
+            }
+
+            // 【セーフティネット設定】: AnimationEvent (OnAttackComplete) がクリップに設定されていない場合でも
+            // アニメーションがフリーズしてしまうのを防ぐため、一定時間（0.8秒）経過で強制的に状態をリセットする
+            if (_stateMachine.CurrentState == PlayerState.Attacking)
+            {
+                if (Time.time - _lastAttackTime > 0.8f)
+                {
+                    _stateMachine.ChangeState(PlayerState.Locomotion);
                 }
             }
         }
@@ -101,8 +129,15 @@ namespace Project.Core.Player
             
             if (_animator != null)
             {
+                // 【修正】もしすでにAttackトリガーが消費されていない場合はリセットしてから再セットする
+                _animator.ResetTrigger("Attack");
                 _animator.SetTrigger("Attack");
                 _animator.SetInteger("ComboStep", _comboStep);
+                Debug.Log($"<color=green>[CombatController]</color> 攻撃を実行しました。コンボ: {_comboStep}");
+            }
+            else
+            {
+                Debug.LogWarning("[CombatController] Animatorが見つかりません。攻撃アニメーションが再生されません。");
             }
         }
 

@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/ThirdParty/3DModels/Environment/SoStylized/Demo/M_Demonstration_Mega.unity
+    path: Assets/ThirdParty/3DModels/Environment/SoStylized/Demo/Game.unity
     guid: f92dfda6574c0dd4bb785010bc97a9a0
+  - enabled: 1
+    path: Assets/ThirdParty/3DModels/Environment/SoStylized/Demo/Title.unity
+    guid: 1bfe68b099b1d9f49b093329477c12ba
   m_configObjects: {}

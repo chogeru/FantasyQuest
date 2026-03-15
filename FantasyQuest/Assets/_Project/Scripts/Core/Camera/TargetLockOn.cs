@@ -26,13 +26,30 @@ namespace Project.Core.CameraSystem
         private float _checkTimer;
         private const float CHECK_INTERVAL = 0.2f;
 
-        private void Update()
+        private void OnEnable()
         {
-            if (UnityEngine.Input.GetKeyDown(KeyCode.Tab)) 
+            if (_inputReader == null)
             {
-                ToggleLockOn();
+                var pc = GetComponent<Project.Core.Player.PlayerController>();
+                if (pc != null) _inputReader = pc.GetInputReader();
             }
 
+            if (_inputReader != null)
+            {
+                _inputReader.OnLockOnEvent += ToggleLockOn;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (_inputReader != null)
+            {
+                _inputReader.OnLockOnEvent -= ToggleLockOn;
+            }
+        }
+
+        private void Update()
+        {
             if (_isLockedOn)
             {
                 _checkTimer -= Time.deltaTime;
